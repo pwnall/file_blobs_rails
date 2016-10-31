@@ -32,6 +32,14 @@ An easy way to add file storage functionality to an existing model is to
 scaffold a new model, move the generated code into your existing model, and
 remove the scaffold.
 
+Use `send_file_blob` to serve a file from a controller action. The method takes
+the same options as the Rails built in
+[`send_data` method](http://api.rubyonrails.org/classes/ActionController/DataStreaming.html#method-i-send_data)
+
+```ruby
+send_file_blob @blob_owner.file, disposition: :inline
+```
+
 
 ## Contributing to file_blobs_rails
 
