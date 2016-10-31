@@ -1,19 +1,3 @@
-require 'simplecov'
-
-module SimpleCov::Configuration
-  def clean_filters
-    @filters = []
-  end
-end
-
-SimpleCov.configure do
-  clean_filters
-  load_adapter 'test_frameworks'
-end
-
-ENV["COVERAGE"] && SimpleCov.start do
-  add_filter "/.rvm/"
-end
 require 'rubygems'
 require 'bundler'
 begin
@@ -23,11 +7,28 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
-require 'minitest/test'
+
+require 'minitest'
+
+require 'action_controller'
+require 'active_record'
+require 'active_support/core_ext'
+require 'rails'
+
+require 'mocha/setup'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'file_blobs_rails'
+
+require 'helpers/action_controller.rb'
+require 'helpers/db_setup.rb'
+require 'helpers/fixtures.rb'
+require 'helpers/i18n.rb'
+require 'helpers/migrations.rb'
+require 'helpers/rails.rb'
+require 'helpers/routes.rb'
+require 'helpers/test_order.rb'
 
 class MiniTest::Test
 end

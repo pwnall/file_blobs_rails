@@ -1,0 +1,13 @@
+require 'test_helper'
+
+class <%= file_name.classify %>Test < ActiveSupport::TestCase
+  test '<%= options[:attr_name] %> is wired correctly' do
+    <%= file_name %> = <%= file_name.tableize %>(:ruby)
+
+    assert_equal 'image/png', <%= file_name %>.<%= options[:attr_name] %>.mime_type
+    assert_equal 'ruby.png', <%= file_name %>.<%= options[:attr_name] %>.original_name
+    assert_equal file_blob_id('files/ruby.png'), <%= file_name %>.<%= options[:attr_name] %>.blob.id
+    assert_equal file_blob_size('files/ruby.png'), <%= file_name %>.<%= options[:attr_name] %>.size
+    assert_equal file_blob_data('files/ruby.png'), <%= file_name %>.<%= options[:attr_name] %>.data
+  end
+end

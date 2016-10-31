@@ -1,0 +1,9 @@
+require 'test_helper'
+
+class <%= file_name.classify %>Test < ActiveSupport::TestCase
+  test 'blob_owner_classes all use has_file_blob' do
+    <%= file_name.camelize %>.blob_owner_classes.each do |klass|
+      assert klass.respond_to?(:file_blob_eligible_for_garbage_collection?), klass.name
+    end
+  end
+end

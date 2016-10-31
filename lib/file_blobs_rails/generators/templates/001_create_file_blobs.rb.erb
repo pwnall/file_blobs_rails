@@ -1,0 +1,7 @@
+class Create<%= file_name.classify.pluralize %> < ActiveRecord::Migration[5.0]
+  def change
+    create_file_blobs_table :<%= file_name.tableize %>, blob_limit: 1.megabyte do |t|
+      # Build any custom table structure here.
+    end
+  end
+end

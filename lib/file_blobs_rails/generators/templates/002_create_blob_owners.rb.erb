@@ -1,0 +1,7 @@
+class Create<%= file_name.classify.pluralize %> < ActiveRecord::Migration[5.0]
+  def change
+    create_table :<%= file_name.tableize %> do |t|
+      t.file_blob :<%= options[:attr_name] %>, null: <%= options[:allow_nil] %>, mime_type_limit: 64, file_name_limit: 256
+    end
+  end
+end

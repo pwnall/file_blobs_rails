@@ -1,0 +1,16 @@
+sudo: false
+language: ruby
+services:
+  - postgresql
+addons:
+  postgresql: "9.4"
+env:
+  - DB=mysql:utf8_general_ci
+  - DB=mysql:utf8_bin
+  - DB=pg DB_USER=postgres
+  - DB=sqlite
+gemfile:
+  - Gemfile.rails5
+rvm:
+  - 2.2.5
+  - 2.3.1

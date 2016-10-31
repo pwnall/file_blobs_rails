@@ -1,0 +1,3 @@
+class <%= file_name.classify %> < ActiveRecord::Base
+  has_file_blob :<%= options[:attr_name] %>, allows_nil: <%= options[:allow_nil] %>, blob_model: <%= options[:blob_model].classify.inspect %>
+end

@@ -14,13 +14,13 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-  gem.name = "file_blobs_rails"
-  gem.homepage = "http://github.com/pwnall/file_blobs_rails"
-  gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "costan@gmail.com"
-  gem.authors = ["Victor Costan"]
+  gem.name = 'file_blobs_rails'
+  gem.homepage = 'https://github.com/pwnall/file_blobs_rails'
+  gem.license = 'MIT'
+  gem.summary = %Q{Database-backed file storage for Rails 5 applications.}
+  gem.description = %Q{This gem is a quick way to add database-backed file storage to a Rails application. Files are stored in a dedicated table and de-duplicated.}
+  gem.email = 'victor@costan.us'
+  gem.authors = ['Victor Costan']
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
@@ -28,14 +28,8 @@ Jeweler::RubygemsDotOrgTasks.new
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.pattern = 'test/**/*_test.rb'
   test.verbose = true
-end
-
-desc "Code coverage detail"
-task :simplecov do
-  ENV['COVERAGE'] = "true"
-  Rake::Task['test'].execute
 end
 
 task :default => :test
