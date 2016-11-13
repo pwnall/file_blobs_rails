@@ -122,7 +122,7 @@ module ActiveRecordExtensions::ClassMethods
         def blob_class
           #{blob_model}
         end
-        def allows_nil?
+        def allow_nil?
           #{allow_nil}
         end
         attr_reader :owner

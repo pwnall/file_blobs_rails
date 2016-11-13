@@ -11,9 +11,9 @@ class FileBlobProxyTest < ActiveSupport::TestCase
     assert_equal GemTestBlob, @message.attachment.blob_class
   end
 
-  test '#allows_nil?' do
-    assert_equal false, @blob_owner.file.allows_nil?
-    assert_equal true, @message.attachment.allows_nil?
+  test '#allow_nil?' do
+    assert_equal false, @blob_owner.file.allow_nil?
+    assert_equal true, @message.attachment.allow_nil?
   end
 
   test '#owner' do
