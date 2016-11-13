@@ -4,13 +4,16 @@ module FileBlobs
 
 # Module mixed into ActiveRecord::ConnectionAdapters::TableDefinition.
 module ActiveRecordTableDefinitionExtensions
-  # Creates the table used to hold file blobs.
+  # Creates the columns used to reference a file blob
   #
-  # @param [Symbol] table_name the name of the table used to hold file data
+  # @param [Symbol] column_name_base the prefix used to generate column names;
+  #     this should match the attribute name given to has_file_blob
   # @param [Hash<Symbol, Object>] options
   # @option options [Boolean] null true
-  # @option options [Integer] blob_limit the maximum file size that can be
-  #     stored in the table; defaults to 1 megabyte
+  # @option options [Integer] mime_type_limit the maximum size of the column
+  #     used to store the file name provided by the user's browser
+  # @option options [Integer] file_name_limit the maximum size of the column
+  #     used to store the file blob's MIME type
   def file_blob(column_name_base = :file, options = {}, &block)
     allow_null = options[:null] || false
     mime_type_limit = options[:mime_type_limit] || 64
