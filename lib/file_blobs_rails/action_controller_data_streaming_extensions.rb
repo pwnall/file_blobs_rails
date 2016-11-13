@@ -28,6 +28,7 @@ module ActionControllerDataStreamingExtensions
       send_data proxy.data, send_options
     end
   end
+  protected :send_file_blob
 end  # module FileBlobs::ActionControllerDataStreamingExtensions
 
 end  # namespace FileBlobs
