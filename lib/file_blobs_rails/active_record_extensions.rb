@@ -158,6 +158,13 @@ module ActiveRecordExtensions::ClassMethods
             # Slow path: we need to copy data across blob tables.
             self.#{attribute_name}_data = new_file.data
           end
+        elsif new_file.nil?
+          # Reset everything to nil.
+          self.#{attribute_name}_mime_type = nil
+          self.#{attribute_name}_original_name = nil
+          self.#{attribute_name}_data = nil
+        else
+          raise ArgumentError, "Invalid file_blob value: \#{new_file.inspect}"
         end
       end
 
@@ -170,8 +177,12 @@ module ActiveRecordExtensions::ClassMethods
         #       that the large FileBlob doesn't hang off of the object
         #       referencing it; this way, the blob's data can be
         #       garbage-collected by the Ruby VM as early as possible
-        blob = #{blob_model}.where(id: #{attribute_name}_blob_id).first!
-        blob.data
+        if blob_id = #{attribute_name}_blob_id
+          blob = #{blob_model}.where(id: blob_id).first!
+          blob.data
+        else
+          nil
+        end
       end
 
       # Convenience setter for the file's content.

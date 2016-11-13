@@ -97,4 +97,27 @@ class FileBlobProxyTest < ActiveSupport::TestCase
                  @message.attachment_blob.data
     assert_equal true, @message.attachment_blob.new_record?
   end
+
+  test 'proxy setter on the owner model with nil' do
+    @blob_owner.file = nil
+
+    assert_equal nil, @blob_owner.file_original_name
+    assert_equal nil, @blob_owner.file_blob_id
+    assert_equal nil, @blob_owner.file_size
+    assert_equal nil, @blob_owner.file_data
+    assert_equal nil, @blob_owner.file_blob
+  end
+
+  test 'proxy setter on the owner model with an invalid value' do
+    exception = assert_raise ArgumentError do
+      @blob_owner.file = [4, 2]
+    end
+    assert_equal 'Invalid file_blob value: [4, 2]', exception.message
+
+    assert_equal 'ruby.png', @blob_owner.file_original_name
+    assert_equal file_blob_id('files/ruby.png'), @blob_owner.file_blob_id
+    assert_equal file_blob_size('files/ruby.png'), @blob_owner.file_size
+    assert_equal file_blob_data('files/ruby.png'), @blob_owner.file_data
+    assert_equal file_blobs(:ruby_png), @blob_owner.file_blob
+  end
 end
