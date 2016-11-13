@@ -51,6 +51,7 @@ module ActiveRecordExtensions::ClassMethods
       # The FileBlob storing the file's content.
       belongs_to :#{attribute_name}_blob,
           { class_name: #{blob_model.inspect} }, -> { select :id }
+      validates_associated :file_blob
 
       class #{attribute_name.to_s.classify}Proxy < FileBlobs::FileBlobProxy
         # Creates a proxy for the given model.
