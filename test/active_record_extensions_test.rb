@@ -6,7 +6,7 @@ class ActiveRecordExtensionsTest < ActiveSupport::TestCase
   end
 
   test 'referenced blob validation' do
-    @blob_owner.file.data = ' ' * 1.megabyte
+    @blob_owner.file_blob.id = nil
     assert !@blob_owner.valid?
     assert_not_empty @blob_owner.errors[:file_blob]
   end

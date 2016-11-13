@@ -19,8 +19,9 @@ module BlobModel
     # The raw data in the file.
     validates :data, presence: true
     validates_each :data do |record, attr, value|
-      if value && value.bytesize > 128.kilobytes
-        record.errors.add attr, 'exceeds 128 kilobytes'.freeze
+      data_limit = record.class.column_for_attribute(:data).limit
+      if data_limit && value && value.bytesize > data_limit
+        record.errors.add attr, 'is too large'.freeze
       end
     end
   end
