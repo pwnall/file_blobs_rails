@@ -1,6 +1,6 @@
 require_relative 'test_helper'
 
-class BlobModelTest < ActiveSupport::TestCase
+class GarbageCollectionTest < ActiveSupport::TestCase
   test 'new blob with no reference gets garbage-collected' do
     BlobOwner.destroy_all
     FileBlob.destroy_all
